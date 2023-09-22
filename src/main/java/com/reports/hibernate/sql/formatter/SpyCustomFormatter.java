@@ -1,4 +1,4 @@
-package com.reports.hibernate.formatter.sql;
+package com.reports.hibernate.sql.formatter;
 
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import org.hibernate.engine.jdbc.internal.BasicFormatterImpl;
