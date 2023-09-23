@@ -4,5 +4,6 @@ public class QueryCountMismatchException extends RuntimeException {
 
     public QueryCountMismatchException(int expected, int actual, String queryType){
         super("Expected " + queryType + " queries amount: " + expected + " , actual: " + actual);
+        this.setStackTrace(new StackTraceElement[0]); // clear stackTrace
     }
 }
