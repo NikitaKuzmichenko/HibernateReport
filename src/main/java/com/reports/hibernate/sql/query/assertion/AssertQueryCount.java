@@ -4,6 +4,10 @@ import com.reports.hibernate.sql.query.assertion.exception.QueryCountMismatchExc
 import com.reports.hibernate.sql.query.info.QueryCounterInfo;
 import com.reports.hibernate.sql.query.info.holder.QueryCounterInfoHolder;
 
+/**
+ * Class for doing asserts for queries, executed by hibernate.
+ * Uses org.hibernate.resource.jdbc.spi.StatementInspector for query counting.
+ */
 public class AssertQueryCount {
 
     private AssertQueryCount() {
