@@ -14,7 +14,7 @@ public class CountingQueryProcessor implements QueryProcessor {
         if (trimmedQuery.isEmpty()) {
             return;
         }
-        if (trimmedQuery.startsWith("select nextval")) {
+        if (trimmedQuery.startsWith("select next")) {
             counterInfo.incrementNextvalCount();
             return;
         }
