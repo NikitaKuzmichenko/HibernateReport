@@ -9,7 +9,7 @@ public class AssertQueryCount {
     private AssertQueryCount() {
     }
 
-    private static QueryCounterInfo counterInfo = QueryCounterInfoHolder.getInfo();
+    private static final QueryCounterInfo counterInfo = QueryCounterInfoHolder.getInfo();
 
     public static void resetCount() {
         counterInfo.clear();
