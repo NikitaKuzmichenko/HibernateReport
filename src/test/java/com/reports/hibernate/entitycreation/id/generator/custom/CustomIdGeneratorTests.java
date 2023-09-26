@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan("com.reports.hibernate.model.enitycreation.id.generator.custom") // scan only required entities
-@DisplayName("Entity with auto id generator")
+@DisplayName("Entity with custom id generator")
 class CustomIdGeneratorTests extends BaseTest {
 
     @Test
-    @DisplayName("Entity saving with all fields set")
+    @DisplayName("Create and get entity")
     void entityWithAllFields() {
         CustomGeneratorUser user = new CustomGeneratorUser();
         user.setFirstName("First One");

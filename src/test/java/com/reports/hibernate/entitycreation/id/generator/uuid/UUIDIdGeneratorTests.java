@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.util.UUID;
 
 @EntityScan("com.reports.hibernate.model.enitycreation.id.generator.uuid") // scan only required entities
-@DisplayName("Entity with minimal settings")
+@DisplayName("Entity with uuid id generator")
 class UUIDIdGeneratorTests extends BaseTest {
 
     @Test
-    @DisplayName("Entity saving with all fields set")
+    @DisplayName("Create and get entity")
     void entityWithAllFields() {
         UUIDGeneratorUser user = new UUIDGeneratorUser();
         user.setFirstName("First One");

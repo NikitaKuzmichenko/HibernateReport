@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 class AutoIdGeneratorTests extends BaseTest {
 
     @Test
-    @DisplayName("Entity saving with all fields set")
+    @DisplayName("Create and get entity")
     void entityWithAllFields() {
         AutoIdGeneratorUser user = new AutoIdGeneratorUser();
         user.setFirstName("First One");

@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan("com.reports.hibernate.model.enitycreation.id.generator.sequence") // scan only required entities
-@DisplayName("Entity with minimal settings")
+@DisplayName("Entity with sequence id generator")
 class SequenceIdGeneratorTests extends BaseTest {
 
     @Test
-    @DisplayName("Entity saving with all fields set")
+    @DisplayName("Create and get entity")
     void entityWithAllFields() {
         SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
         user.setFirstName("First One");

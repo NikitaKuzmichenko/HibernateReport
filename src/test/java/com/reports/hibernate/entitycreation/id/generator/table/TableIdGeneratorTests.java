@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan("com.reports.hibernate.model.enitycreation.id.generator.table") // scan only required entities
-@DisplayName("Entity with minimal settings")
+@DisplayName("Entity with table id generator")
 class TableIdGeneratorTests extends BaseTest {
 
     @Test
-    @DisplayName("All fields set")
+    @DisplayName("Create and get entity")
     void entityWithAllFields() {
         TableIdGeneratorUser user = new TableIdGeneratorUser();
         user.setFirstName("First One");
