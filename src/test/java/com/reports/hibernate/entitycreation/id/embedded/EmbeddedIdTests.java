@@ -1,14 +1,14 @@
 package com.reports.hibernate.entitycreation.id.embedded;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.enitycreation.id.embedded.EmbeddedIdUser;
-import com.reports.hibernate.model.enitycreation.id.embedded.UserId;
+import com.reports.hibernate.model.entity.creation.id.embedded.EmbeddedIdUser;
+import com.reports.hibernate.model.entity.creation.id.embedded.UserId;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan("com.reports.hibernate.model.enitycreation.id.embedded") // scan only required entities
+@EntityScan("com.reports.hibernate.model.entity.creation.id.embedded") // scan only required entities
 @DisplayName("Entity with embedded id")
 class EmbeddedIdTests extends BaseTest {
 

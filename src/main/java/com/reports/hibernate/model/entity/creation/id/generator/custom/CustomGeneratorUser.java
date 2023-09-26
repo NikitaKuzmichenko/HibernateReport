@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.generator.custom;
+package com.reports.hibernate.model.entity.creation.id.generator.custom;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class CustomGeneratorUser {
     @GeneratedValue(generator = "custom-generator")
     @GenericGenerator(name = "custom-generator",
             parameters = @Parameter(name = "prefix", value = "Random"),
-            strategy = "com.reports.hibernate.model.enitycreation.id.generator.custom.generator.CustomIdGenerator")
+            strategy = "com.reports.hibernate.model.entity.creation.id.generator.custom.generator.CustomIdGenerator")
     private String id;
 
     private String firstName;

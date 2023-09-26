@@ -1,14 +1,13 @@
 package com.reports.hibernate.entitycreation.id.generator.identity;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.enitycreation.id.generator.identity.IdentityIdGeneratorUser;
-import com.reports.hibernate.model.enitycreation.minimalsettings.MinimalSettingsUser;
+import com.reports.hibernate.model.entity.creation.id.generator.identity.IdentityIdGeneratorUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan("com.reports.hibernate.model.enitycreation.id.generator.identity") // scan only required entities
+@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.identity") // scan only required entities
 @DisplayName("Entity with identity id generator")
 class IdentityIdGeneratorTests extends BaseTest {
 

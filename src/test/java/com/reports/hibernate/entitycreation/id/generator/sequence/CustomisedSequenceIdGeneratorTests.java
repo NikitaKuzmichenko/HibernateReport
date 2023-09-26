@@ -1,8 +1,7 @@
 package com.reports.hibernate.entitycreation.id.generator.sequence;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.enitycreation.id.generator.sequence.customised.CustomisedSequenceIdGeneratorUser;
-import com.reports.hibernate.model.enitycreation.id.generator.sequence.base.SequenceIdGeneratorUser;
+import com.reports.hibernate.model.entity.creation.id.generator.sequence.customised.CustomisedSequenceIdGeneratorUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.util.ArrayList;
 import java.util.List;
 
-@EntityScan("com.reports.hibernate.model.enitycreation.id.generator.sequence.customised") // scan only required entities
+@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.sequence.customised") // scan only required entities
 @DisplayName("Entity with pooled sequence id generator")
 class CustomisedSequenceIdGeneratorTests extends BaseTest {
 

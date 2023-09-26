@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.generator.sequence.customised;
+package com.reports.hibernate.model.entity.creation.id.generator.sequence.customised;
 
 import jakarta.persistence.*;
 import lombok.*;

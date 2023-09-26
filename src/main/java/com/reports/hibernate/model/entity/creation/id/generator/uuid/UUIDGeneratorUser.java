@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.generator.identity;
+package com.reports.hibernate.model.entity.creation.id.generator.uuid;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,12 +6,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Data
-public class IdentityIdGeneratorUser {
+public class UUIDGeneratorUser {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String firstName;
 

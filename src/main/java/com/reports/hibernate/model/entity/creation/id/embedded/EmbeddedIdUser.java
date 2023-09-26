@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.embedded;
+package com.reports.hibernate.model.entity.creation.id.embedded;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

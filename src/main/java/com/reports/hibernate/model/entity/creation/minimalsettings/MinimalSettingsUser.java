@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.minimalsettings;
+package com.reports.hibernate.model.entity.creation.minimalsettings;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

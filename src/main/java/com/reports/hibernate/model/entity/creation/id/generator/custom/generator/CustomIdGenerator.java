@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.generator.custom.generator;
+package com.reports.hibernate.model.entity.creation.id.generator.custom.generator;
 
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;

@@ -1,13 +1,13 @@
 package com.reports.hibernate.entitycreation.minimalsettings;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.enitycreation.minimalsettings.MinimalSettingsUser;
+import com.reports.hibernate.model.entity.creation.minimalsettings.MinimalSettingsUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan("com.reports.hibernate.model.enitycreation.minimalsettings") // scan only required entities
+@EntityScan("com.reports.hibernate.model.entity.creation.minimalsettings") // scan only required entities
 @DisplayName("Entity with minimal settings")
 class MinimalSettingsTests extends BaseTest {
 
