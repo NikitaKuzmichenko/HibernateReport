@@ -2,16 +2,10 @@ package com.reports.hibernate.model.enitycreation.minimalsettings;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@EqualsAndHashCode
+@Data
 public class MinimalSettingsUser {
     @Id
     private Long id;
