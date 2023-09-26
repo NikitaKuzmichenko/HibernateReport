@@ -14,7 +14,7 @@ class TableIdGeneratorTests extends BaseTest {
 
     @Test
     @DisplayName("Create and get entity")
-    void entityWithAllFields() {
+    void createAndGetEntity() {
         TableIdGeneratorUser user = new TableIdGeneratorUser();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");

@@ -13,7 +13,7 @@ class MinimalSettingsTests extends BaseTest {
 
     @Test
     @DisplayName("Entity saving with all fields set")
-    void entityWithAllFields() {
+    void createAndGetEntityWithAllFields() {
         MinimalSettingsUser user = new MinimalSettingsUser();
         user.setId(1L);
         user.setFirstName("First One");
@@ -31,7 +31,7 @@ class MinimalSettingsTests extends BaseTest {
 
     @Test
     @DisplayName("Entity saving with only required fields set")
-    void entityWithRequiredFields() {
+    void createAndGetEntityWithRequiredFields() {
         MinimalSettingsUser user = new MinimalSettingsUser();
         user.setId(1L);
         session.save(user);

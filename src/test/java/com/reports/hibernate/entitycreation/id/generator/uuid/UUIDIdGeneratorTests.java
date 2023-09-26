@@ -1,7 +1,6 @@
 package com.reports.hibernate.entitycreation.id.generator.uuid;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.enitycreation.id.generator.sequence.SequenceIdGeneratorUser;
 import com.reports.hibernate.model.enitycreation.id.generator.uuid.UUIDGeneratorUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +15,7 @@ class UUIDIdGeneratorTests extends BaseTest {
 
     @Test
     @DisplayName("Create and get entity")
-    void entityWithAllFields() {
+    void createAndGetEntity() {
         UUIDGeneratorUser user = new UUIDGeneratorUser();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");

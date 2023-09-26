@@ -14,7 +14,7 @@ class IdentityIdGeneratorTests extends BaseTest {
 
     @Test
     @DisplayName("Create and get entity")
-    void entityWithAllFields() {
+    void createAndGetEntity() {
         IdentityIdGeneratorUser user = new IdentityIdGeneratorUser();
         user.setId(1L);
         user.setFirstName("First One");

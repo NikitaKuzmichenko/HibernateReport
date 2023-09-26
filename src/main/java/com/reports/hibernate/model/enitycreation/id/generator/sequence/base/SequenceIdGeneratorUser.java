@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.enitycreation.id.generator.sequence;
+package com.reports.hibernate.model.enitycreation.id.generator.sequence.base;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
