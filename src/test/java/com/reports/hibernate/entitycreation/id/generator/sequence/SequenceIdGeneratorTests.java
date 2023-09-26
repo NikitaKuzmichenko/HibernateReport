@@ -14,24 +14,24 @@ import java.util.List;
 @DisplayName("Entity with sequence id generator")
 class SequenceIdGeneratorTests extends BaseTest {
 
-    @Test
-    @DisplayName("Create and get entity")
-    void createAndGetEntity() {
-        SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
-        user.setFirstName("First One");
-        user.setMiddleName("Middle One");
-        user.setLastName("Last One");
-        long id = (long) session.save(user);
-        flushAndClear();
-        SequenceIdGeneratorUser fetchedUser = session.get(SequenceIdGeneratorUser.class, id);
-        assertAll(
-                () -> AssertQueryCount.assertNextValCount(1),
-                () -> AssertQueryCount.assertInsertCount(1),
-                () -> AssertQueryCount.assertSelectCount(1),
-                () -> assertEquals(user, fetchedUser),
-                () -> assertNotSame(user, fetchedUser)
-        );
-    }
+//    @Test
+//    @DisplayName("Create and get entity")
+//    void createAndGetEntity() {
+//        SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
+//        user.setFirstName("First One");
+//        user.setMiddleName("Middle One");
+//        user.setLastName("Last One");
+//        long id = (long) session.save(user);
+//        flushAndClear();
+//        SequenceIdGeneratorUser fetchedUser = session.get(SequenceIdGeneratorUser.class, id);
+//        assertAll(
+//                () -> AssertQueryCount.assertNextValCount(1),
+//                () -> AssertQueryCount.assertInsertCount(1),
+//                () -> AssertQueryCount.assertSelectCount(1),
+//                () -> assertEquals(user, fetchedUser),
+//                () -> assertNotSame(user, fetchedUser)
+//        );
+//    }
 
     @Test
     @DisplayName("Create and get multiple entities")

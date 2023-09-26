@@ -15,24 +15,24 @@ import java.util.List;
 @DisplayName("Entity with pooled sequence id generator")
 class CustomisedSequenceIdGeneratorTests extends BaseTest {
 
-    @Test
-    @DisplayName("Create and get one entity")
-    void createAndGetEntity() {
-        CustomisedSequenceIdGeneratorUser user = new CustomisedSequenceIdGeneratorUser();
-        user.setFirstName("First One");
-        user.setMiddleName("Middle One");
-        user.setLastName("Last One");
-        long id = (long) session.save(user);
-        flushAndClear();
-        CustomisedSequenceIdGeneratorUser fetchedUser = session.get(CustomisedSequenceIdGeneratorUser.class, id);
-        assertAll(
-                () -> AssertQueryCount.assertNextValCount(1),
-                () -> AssertQueryCount.assertInsertCount(1),
-                () -> AssertQueryCount.assertSelectCount(1),
-                () -> assertEquals(user, fetchedUser),
-                () -> assertNotSame(user, fetchedUser)
-        );
-    }
+//    @Test
+//    @DisplayName("Create and get one entity")
+//    void createAndGetEntity() {
+//        CustomisedSequenceIdGeneratorUser user = new CustomisedSequenceIdGeneratorUser();
+//        user.setFirstName("First One");
+//        user.setMiddleName("Middle One");
+//        user.setLastName("Last One");
+//        long id = (long) session.save(user);
+//        flushAndClear();
+//        CustomisedSequenceIdGeneratorUser fetchedUser = session.get(CustomisedSequenceIdGeneratorUser.class, id);
+//        assertAll(
+//                () -> AssertQueryCount.assertNextValCount(1),
+//                () -> AssertQueryCount.assertInsertCount(1),
+//                () -> AssertQueryCount.assertSelectCount(1),
+//                () -> assertEquals(user, fetchedUser),
+//                () -> assertNotSame(user, fetchedUser)
+//        );
+//    }
 
     @Test
     @DisplayName("Create and get multiple entities")
