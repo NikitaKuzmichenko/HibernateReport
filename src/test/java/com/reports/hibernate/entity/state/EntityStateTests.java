@@ -82,7 +82,7 @@ class EntityStateTests extends BaseTest {
         assertAll(
                 () -> assertFalse(isUserInTransientStateBeforeInsert,
                         "Entity should be in Transient state after creation, "
-                                + "but check bailed because id was assigned manually"),// transient state check
+                                + "but check failed because id was assigned manually"),// transient state check
                 () -> assertTrue(isUserInManagedStateAfterInsert,
                         "Entity should be in Manged state after insert"),// managed state check
                 () -> assertTrue(isUserInManagedStateAfterMerge,
