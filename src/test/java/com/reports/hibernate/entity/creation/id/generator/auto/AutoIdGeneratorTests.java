@@ -1,29 +1,28 @@
-package com.reports.hibernate.entitycreation.id.generator.uuid;
+package com.reports.hibernate.entity.creation.id.generator.auto;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.uuid.UUIDGeneratorUser;
+import com.reports.hibernate.model.entity.creation.id.generator.auto.AutoIdGeneratorUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import java.util.UUID;
-
-@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.uuid") // scan only required entities
-@DisplayName("Entity with uuid id generator")
-class UUIDIdGeneratorTests extends BaseTest {
+@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.auto") // scan only required entities
+@DisplayName("Entity with auto id generator")
+class AutoIdGeneratorTests extends BaseTest {
 
     @Test
     @DisplayName("Create and get entity")
     void createAndGetEntity() {
-        UUIDGeneratorUser user = new UUIDGeneratorUser();
+        AutoIdGeneratorUser user = new AutoIdGeneratorUser();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");
         user.setLastName("Last One");
-        UUID id = (UUID) session.save(user);
+        long id = (long) session.save(user);
         flushAndClear();
-        UUIDGeneratorUser fetchedUser = session.get(UUIDGeneratorUser.class, id);
+        AutoIdGeneratorUser fetchedUser = session.get(AutoIdGeneratorUser.class, id);
         assertAll(
+                () -> AssertQueryCount.assertNextValCount(1),
                 () -> AssertQueryCount.assertInsertCount(1),
                 () -> AssertQueryCount.assertSelectCount(1),
                 () -> assertEquals(user, fetchedUser),

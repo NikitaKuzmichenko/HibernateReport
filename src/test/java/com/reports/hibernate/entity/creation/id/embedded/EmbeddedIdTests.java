@@ -1,4 +1,4 @@
-package com.reports.hibernate.entitycreation.id.embedded;
+package com.reports.hibernate.entity.creation.id.embedded;
 
 import com.reports.hibernate.base.BaseTest;
 import com.reports.hibernate.model.entity.creation.id.embedded.EmbeddedIdUser;

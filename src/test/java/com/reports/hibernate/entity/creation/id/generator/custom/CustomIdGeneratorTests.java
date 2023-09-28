@@ -1,4 +1,4 @@
-package com.reports.hibernate.entitycreation.id.generator.custom;
+package com.reports.hibernate.entity.creation.id.generator.custom;
 
 import com.reports.hibernate.base.BaseTest;
 import com.reports.hibernate.model.entity.creation.id.generator.custom.CustomGeneratorUser;

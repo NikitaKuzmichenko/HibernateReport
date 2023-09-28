@@ -1,7 +1,7 @@
-package com.reports.hibernate.entitycreation.id.generator.sequence;
+package com.reports.hibernate.entity.creation.id.generator.sequence;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.sequence.customised.CustomisedSequenceIdGeneratorUser;
+import com.reports.hibernate.model.entity.creation.id.generator.sequence.base.SequenceIdGeneratorUser;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,20 +10,20 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.util.ArrayList;
 import java.util.List;
 
-@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.sequence.customised") // scan only required entities
-@DisplayName("Entity with pooled sequence id generator")
-class CustomisedSequenceIdGeneratorTests extends BaseTest {
+@EntityScan("com.reports.hibernate.model.entity.creation.id.generator.sequence.base") // scan only required entities
+@DisplayName("Entity with sequence id generator")
+class SequenceIdGeneratorTests extends BaseTest {
 
 //    @Test
-//    @DisplayName("Create and get one entity")
+//    @DisplayName("Create and get entity")
 //    void createAndGetEntity() {
-//        CustomisedSequenceIdGeneratorUser user = new CustomisedSequenceIdGeneratorUser();
+//        SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
 //        user.setFirstName("First One");
 //        user.setMiddleName("Middle One");
 //        user.setLastName("Last One");
 //        long id = (long) session.save(user);
 //        flushAndClear();
-//        CustomisedSequenceIdGeneratorUser fetchedUser = session.get(CustomisedSequenceIdGeneratorUser.class, id);
+//        SequenceIdGeneratorUser fetchedUser = session.get(SequenceIdGeneratorUser.class, id);
 //        assertAll(
 //                () -> AssertQueryCount.assertNextValCount(1),
 //                () -> AssertQueryCount.assertInsertCount(1),
@@ -36,11 +36,11 @@ class CustomisedSequenceIdGeneratorTests extends BaseTest {
     @Test
     @DisplayName("Create and get multiple entities")
     void createAndGetMultipleEntities() {
-        int entitiesCount = 10;
-        List<CustomisedSequenceIdGeneratorUser> users = new ArrayList<>();
+        int entitiesCount = 5;
+        List<SequenceIdGeneratorUser> users = new ArrayList<>();
         List<Long> userIds = new ArrayList<>();
         for (int i = 0; i < entitiesCount; i++) {
-            CustomisedSequenceIdGeneratorUser user = new CustomisedSequenceIdGeneratorUser();
+            SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
             user.setFirstName("First " + i);
             user.setMiddleName("Middle " + i);
             user.setLastName("Last " + i);
@@ -48,20 +48,20 @@ class CustomisedSequenceIdGeneratorTests extends BaseTest {
             userIds.add((Long) session.save(user));
         }
         flushAndClear();
-        List<CustomisedSequenceIdGeneratorUser> fetchedUsers = new ArrayList<>();
-        for (long id : userIds) {
-            fetchedUsers.add(session.get(CustomisedSequenceIdGeneratorUser.class, id));
+        List<SequenceIdGeneratorUser> fetchedUsers = new ArrayList<>();
+        for(long id : userIds){
+            fetchedUsers.add(session.get(SequenceIdGeneratorUser.class, id));
         }
-        // increment size = 5 and default initial value = 2
-        // next val №1 = selected [2]
-        // next val №2 = selected [3, 4, 5, 6, 7]
-        // next val №3 = selected [8, 9, 10, 11, 12]
+        // Default increment size = 50 and default initial value = 1
+        // Hibernate executes one select to get the ID from the sequence
+        // If the selected value is equal to the sequence initial value,
+        // the Hibernate selects the next ID from the sequence as a high value,
+        // setting the initial value as a range low value. (so hibernate fetches form 1 to 51)
         assertAll(
-                () -> AssertQueryCount.assertNextValCount(3),
+                () -> AssertQueryCount.assertNextValCount(2),
                 () -> AssertQueryCount.assertInsertCount(entitiesCount),
                 () -> AssertQueryCount.assertSelectCount(entitiesCount),
                 () -> assertEquals(users, fetchedUsers)
         );
     }
-
 }

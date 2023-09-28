@@ -1,4 +1,4 @@
-package com.reports.hibernate.entitycreation.minimalsettings;
+package com.reports.hibernate.entity.creation.minimalsettings;
 
 import com.reports.hibernate.base.BaseTest;
 import com.reports.hibernate.model.entity.creation.minimalsettings.MinimalSettingsUser;
