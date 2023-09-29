@@ -15,4 +15,11 @@ public class BidirectionalOneToOneParent {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private BidirectionalOneToOneChild child;
+
+    public void addParent(BidirectionalOneToOneChild child){
+        if(child != null){
+            child.setParent(this);
+        }
+        this.child = child;
+    }
 }
