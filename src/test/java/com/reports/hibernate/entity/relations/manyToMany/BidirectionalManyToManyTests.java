@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@EntityScan("com.reports.hibernate.model.entity.relations.manyToMany.unidirectional") // scan only required entities
+@EntityScan("com.reports.hibernate.model.entity.relations.manyToMany.bidirectional") // scan only required entities
 @DisplayName("ManyToMany relationship")
 class BidirectionalManyToManyTests extends BaseTest {
 
