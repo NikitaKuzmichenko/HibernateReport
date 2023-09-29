@@ -14,5 +14,6 @@ public class UnidirectionalOneToOneParent {
     private String parentName;
 
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "child_id")
     private UnidirectionalOneToOneChild child;
 }

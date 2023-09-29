@@ -1,9 +1,6 @@
 package com.reports.hibernate.model.entity.relations.oneToOne.bidirectional;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -16,4 +13,6 @@ public class BidirectionalOneToOneChild {
 
     private String childName;
 
+    @OneToOne(mappedBy = "child")
+    private BidirectionalOneToOneParent parent;
 }

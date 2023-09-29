@@ -1,9 +1,6 @@
 package com.reports.hibernate.model.entity.relations.oneToOne.mapsId;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -11,9 +8,12 @@ import lombok.Data;
 public class MapsIdOneToOneChild {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String childName;
+
+    @OneToOne(mappedBy = "child", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private MapsIdOneToOneParent parent;
 
 }

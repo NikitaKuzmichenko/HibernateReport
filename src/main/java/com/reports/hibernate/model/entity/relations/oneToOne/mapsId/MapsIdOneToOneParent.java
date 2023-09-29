@@ -13,6 +13,8 @@ public class MapsIdOneToOneParent {
 
     private String parentName;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "child_id")
     private MapsIdOneToOneChild child;
 }
