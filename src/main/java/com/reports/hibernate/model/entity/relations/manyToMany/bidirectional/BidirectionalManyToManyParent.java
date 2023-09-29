@@ -1,12 +1,17 @@
 package com.reports.hibernate.model.entity.relations.manyToMany.bidirectional;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class BidirectionalManyToManyParent {
 
     @Id
@@ -25,5 +30,15 @@ public class BidirectionalManyToManyParent {
                     name = "childId_id", referencedColumnName = "id"
             )
     )
-    private List<BidirectionalManyToManyChild> children;
+    private Set<BidirectionalManyToManyChild> children = new HashSet<>();
+
+    public void addChildren(Set<BidirectionalManyToManyChild> children) {
+        for (BidirectionalManyToManyChild child : children) {
+            if (child != null) {
+                child.getParents().add(this);
+            }
+            this.children.add(child);
+        }
+    }
+
 }

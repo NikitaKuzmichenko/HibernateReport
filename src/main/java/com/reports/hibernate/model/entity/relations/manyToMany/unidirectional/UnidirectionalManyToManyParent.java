@@ -1,12 +1,16 @@
 package com.reports.hibernate.model.entity.relations.manyToMany.unidirectional;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class UnidirectionalManyToManyParent {
 
     @Id
@@ -25,5 +29,5 @@ public class UnidirectionalManyToManyParent {
                     name = "childId_id", referencedColumnName = "id"
             )
     )
-    private List<UnidirectionalManyToManyChild> children;
+    private Set<UnidirectionalManyToManyChild> children;
 }
