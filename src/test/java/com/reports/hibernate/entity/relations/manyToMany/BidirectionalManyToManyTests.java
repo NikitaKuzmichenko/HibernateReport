@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @EntityScan("com.reports.hibernate.model.entity.relations.manyToMany.bidirectional") // scan only required entities
-@DisplayName("ManyToMany relationship")
+@DisplayName("Bidirectional ManyToMany relationship")
 class BidirectionalManyToManyTests extends BaseTest {
 
     @Test

@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @EntityScan("com.reports.hibernate.model.entity.relations.manyToMany.unidirectional") // scan only required entities
-@DisplayName("ManyToMany relationship")
+@DisplayName("Unidirectional ManyToMany relationship")
 class UnidirectionalManyToManyTests extends BaseTest {
 
     @Test
