@@ -14,6 +14,7 @@ public class BidirectionalOneToOneParent {
     private String parentName;
 
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "child_id")
     private BidirectionalOneToOneChild child;
 
     public void addParent(BidirectionalOneToOneChild child){

@@ -30,14 +30,17 @@ public class BidirectionalManyToManyParent {
                     name = "childId_id", referencedColumnName = "id"
             )
     )
-    private Set<BidirectionalManyToManyChild> children = new HashSet<>();
+    private Set<BidirectionalManyToManyChild> children;
 
-    public void addChildren(Set<BidirectionalManyToManyChild> children) {
+    public void setChildrenConsistently(Set<BidirectionalManyToManyChild> children) {
         for (BidirectionalManyToManyChild child : children) {
             if (child != null) {
+                if (child.getParents() == null) {
+                    child.setParents(new HashSet<>());
+                }
                 child.getParents().add(this);
             }
-            this.children.add(child);
+            this.children = children;
         }
     }
 

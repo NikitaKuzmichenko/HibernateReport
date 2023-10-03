@@ -20,15 +20,18 @@ public class BidirectionalManyToManyChild {
 
     private String childName;
 
-    @ManyToMany(mappedBy = "children", cascade = CascadeType.PERSIST)
-    private Set<BidirectionalManyToManyParent> parents = new HashSet<>();
+    @ManyToMany(mappedBy = "children")
+    private Set<BidirectionalManyToManyParent> parents;
 
-    public void addParents(Set<BidirectionalManyToManyParent> parents){
-        for(BidirectionalManyToManyParent parent : parents){
-            if(parent != null){
+    public void setParentsConsistently(Set<BidirectionalManyToManyParent> parents) {
+        for (BidirectionalManyToManyParent parent : parents) {
+            if (parent != null) {
+                if (parent.getChildren() == null) {
+                    parent.setChildren(new HashSet<>());
+                }
                 parent.getChildren().add(this);
             }
-            this.parents.add(parent);
+            this.parents = parents;
         }
     }
 }

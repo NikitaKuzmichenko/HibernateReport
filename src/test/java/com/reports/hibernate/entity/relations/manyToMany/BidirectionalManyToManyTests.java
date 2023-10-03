@@ -8,9 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @EntityScan("com.reports.hibernate.model.entity.relations.manyToMany.bidirectional") // scan only required entities
@@ -32,6 +30,29 @@ class BidirectionalManyToManyTests extends BaseTest {
         }
 
         assertAll(
+                () -> assertNull(children.iterator().next().getParents()),
+                // hibernate won't set inverse references automatically
+                () -> AssertQueryCount.assertInsertCount(
+                        childrenAmount + parentsAmount + childrenAmount * childrenAmount)
+        );
+    }
+
+    @Test
+    @DisplayName("One sided saving of parents. Using of consistent setters")
+    void oneSidedConsistentSaveOfParent() {
+        int parentsAmount = 3;
+        int childrenAmount = 3;
+        Set<BidirectionalManyToManyChild> children = generateChildren(parentsAmount);
+        Set<BidirectionalManyToManyParent> parents = generateParents(childrenAmount);
+
+        for (BidirectionalManyToManyParent parent : parents) {
+            parent.setChildrenConsistently(children);
+            session.persist(parent);
+            session.flush();
+        }
+
+        assertAll(
+                () -> assertEquals(children.iterator().next().getParents().size(), parentsAmount),
                 () -> AssertQueryCount.assertInsertCount(
                         childrenAmount + parentsAmount + childrenAmount * childrenAmount)
         );
@@ -52,28 +73,7 @@ class BidirectionalManyToManyTests extends BaseTest {
         }
 
         assertAll(
-                () -> AssertQueryCount.assertInsertCount(childrenAmount + parentsAmount)
-                // no associations will be saved
-        );
-    }
-
-    @Test
-    @DisplayName("One sided saving of children. Using of consistent setters")
-    void oneSidedConsistentSaveOfChild() {
-        int parentsAmount = 3;
-        int childrenAmount = 3;
-        Set<BidirectionalManyToManyChild> children = generateChildren(parentsAmount);
-        Set<BidirectionalManyToManyParent> parents = generateParents(childrenAmount);
-
-        for (BidirectionalManyToManyChild child : children) {
-            child.addParents(parents);
-            session.persist(child);
-            session.flush();
-        }
-
-        assertAll(
-                () -> AssertQueryCount.assertInsertCount(
-                        childrenAmount + parentsAmount + childrenAmount * childrenAmount)
+                () -> AssertQueryCount.assertInsertCount(childrenAmount)
         );
     }
 

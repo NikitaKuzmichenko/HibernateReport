@@ -16,6 +16,5 @@ public class BadOneToManyParent {
     private String parentName;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "parent_id")
     private List<BadOneToManyChild> children;
 }

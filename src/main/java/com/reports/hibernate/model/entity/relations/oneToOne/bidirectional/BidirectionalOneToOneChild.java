@@ -13,7 +13,7 @@ public class BidirectionalOneToOneChild {
 
     private String childName;
 
-    @OneToOne(mappedBy = "child", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "child")
     private BidirectionalOneToOneParent parent;
 
     public void addParent(BidirectionalOneToOneParent parent){

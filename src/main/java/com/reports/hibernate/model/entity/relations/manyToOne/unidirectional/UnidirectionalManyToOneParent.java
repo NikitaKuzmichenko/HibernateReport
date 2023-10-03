@@ -14,6 +14,6 @@ public class UnidirectionalManyToOneParent {
     private String parentName;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="child_id")
-    private UnidirectionalManyToOneChild children;
+    @JoinColumn(name = "child_id")
+    private UnidirectionalManyToOneChild child;
 }
