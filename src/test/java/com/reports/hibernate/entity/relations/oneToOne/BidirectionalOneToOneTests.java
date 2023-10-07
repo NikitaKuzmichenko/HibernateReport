@@ -24,7 +24,8 @@ class BidirectionalOneToOneTests extends BaseTest {
         flushAndClear();
         assertAll(
                 () -> assertNull(child.getParent()),
-                () -> AssertQueryCount.assertInsertCount(2)
+                () -> AssertQueryCount.assertInsertCount(2),
+                () -> AssertQueryCount.assertUpdateCount(0)
         );
     }
 }

@@ -25,7 +25,8 @@ public class UnidirectionalOneToManyTest extends BaseTest {
         session.persist(parent);
         flushAndClear();
         assertAll(
-                () -> AssertQueryCount.assertInsertCount(2)
+                () -> AssertQueryCount.assertInsertCount(2),
+                () -> AssertQueryCount.assertUpdateCount(1)
         );
     }
 
