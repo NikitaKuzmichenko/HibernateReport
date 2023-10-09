@@ -7,8 +7,6 @@ plugins {
 group = 'com.reports'
 version = '0.0.1-SNAPSHOT'
 
-ext['hibernate.version'] = '6.0.0.Final'
-
 java {
     sourceCompatibility = '17'
 }
@@ -31,7 +29,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation group: 'com.github.gavlyukovskiy', name: 'p6spy-spring-boot-starter', version: '1.9.0'
-//    implementation group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.6.15.Final'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
