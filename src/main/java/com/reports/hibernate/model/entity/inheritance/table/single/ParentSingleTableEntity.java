@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.entity.inheritance.table.single.unsable;
+package com.reports.hibernate.model.entity.inheritance.table.single;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="child_type", discriminatorType = DiscriminatorType.INTEGER)
-public class ParentUnusableSingleTableEntity {
+public class ParentSingleTableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

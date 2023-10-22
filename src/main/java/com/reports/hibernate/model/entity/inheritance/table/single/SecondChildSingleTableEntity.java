@@ -1,4 +1,4 @@
-package com.reports.hibernate.model.entity.inheritance.table.single.usable;
+package com.reports.hibernate.model.entity.inheritance.table.single;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @DiscriminatorValue("1")
-public class SecondChildUsableSingleTableEntity extends ParentUsableSingleTableEntity {
+public class SecondChildSingleTableEntity extends ParentSingleTableEntity {
 
     private String secondChildName;
 
