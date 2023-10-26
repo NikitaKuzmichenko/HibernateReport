@@ -19,10 +19,10 @@ public class LazyEntityGraphCollectionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "collectionEntity", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collectionEntity", fetch = FetchType.LAZY)
     private List<LazyEntityGraphFirstReferencedEntity> firstReferencedEntities;
 
-    @OneToMany(mappedBy = "collectionEntity", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "collectionEntity", fetch = FetchType.EAGER)
     private List<LazyEntityGraphSecondReferencedEntity> secondReferencedEntities;
 
 }

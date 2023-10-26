@@ -17,13 +17,8 @@ public class LazyEntityGraphFirstReferencedEntity {
 
     private String name;
 
-    public LazyEntityGraphFirstReferencedEntity(String name, LazyEntityGraphCollectionEntity collectionEntity) {
-        this.collectionEntity = collectionEntity;
-        this.name = name;
-    }
-
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LazyEntityGraphCollectionEntity collectionEntity;

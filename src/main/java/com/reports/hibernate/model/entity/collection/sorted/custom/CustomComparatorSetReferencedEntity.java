@@ -22,7 +22,7 @@ public class CustomComparatorSetReferencedEntity implements Comparable<CustomCom
     }
 
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     private CustomComparatorSetCollectionEntity collectionEntity;
 

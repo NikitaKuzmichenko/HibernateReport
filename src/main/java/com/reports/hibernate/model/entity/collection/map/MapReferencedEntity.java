@@ -20,7 +20,7 @@ public class MapReferencedEntity {
     private String name;
 
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     private MapCollectionEntity collectionEntity;
 

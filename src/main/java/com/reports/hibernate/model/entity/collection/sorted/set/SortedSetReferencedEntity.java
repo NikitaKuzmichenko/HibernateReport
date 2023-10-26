@@ -21,7 +21,7 @@ public class SortedSetReferencedEntity implements Comparable<SortedSetReferenced
     private String name;
 
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     private SortedSetCollectionEntity collectionEntity;
 

@@ -18,13 +18,8 @@ public class LazyBatchReferencedEntity {
 
     private String name;
 
-    public LazyBatchReferencedEntity(String name, LazyBatchCollectionEntity collectionEntity) {
-        this.collectionEntity = collectionEntity;
-        this.name = name;
-    }
-
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LazyBatchCollectionEntity collectionEntity;

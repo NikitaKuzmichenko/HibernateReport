@@ -17,13 +17,8 @@ public class LazySubSelectReferencedEntity {
 
     private String name;
 
-    public LazySubSelectReferencedEntity(String name, LazySubSelectCollectionEntity collectionEntity) {
-        this.collectionEntity = collectionEntity;
-        this.name = name;
-    }
-
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LazySubSelectCollectionEntity collectionEntity;

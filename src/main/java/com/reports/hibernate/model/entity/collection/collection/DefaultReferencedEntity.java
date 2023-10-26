@@ -22,7 +22,7 @@ public class DefaultReferencedEntity {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false, updatable = false)
+    @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
     private DefaultCollectionEntity collectionEntity;
 }
