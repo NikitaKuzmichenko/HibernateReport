@@ -11,8 +11,8 @@ import java.util.List;
             @NamedAttributeNode("firstReferencedEntities"),
     }
 )
-@Entity
 @Data
+@Entity
 public class LazyEntityGraphCollectionEntity {
 
     @Id

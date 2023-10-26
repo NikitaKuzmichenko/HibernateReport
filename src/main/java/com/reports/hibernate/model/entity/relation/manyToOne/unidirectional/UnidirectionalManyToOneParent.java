@@ -3,8 +3,8 @@ package com.reports.hibernate.model.entity.relation.manyToOne.unidirectional;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class UnidirectionalManyToOneParent {
 
     @Id

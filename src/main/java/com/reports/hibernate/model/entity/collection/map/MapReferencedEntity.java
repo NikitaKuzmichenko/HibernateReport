@@ -1,10 +1,7 @@
 package com.reports.hibernate.model.entity.collection.map;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -19,14 +16,15 @@ public class MapReferencedEntity {
 
     private String name;
 
-    @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false)
-    @EqualsAndHashCode.Exclude
-    private MapCollectionEntity collectionEntity;
-
     public MapReferencedEntity(String name, MapCollectionEntity collectionEntity) {
         this.name = name;
         this.collectionEntity = collectionEntity;
     }
+
+    @ManyToOne()
+    @JoinColumn(name = "collectionEntityId", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private MapCollectionEntity collectionEntity;
 
 }

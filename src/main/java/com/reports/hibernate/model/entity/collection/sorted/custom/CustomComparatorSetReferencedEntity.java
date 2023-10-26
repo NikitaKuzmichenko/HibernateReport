@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class CustomComparatorSetReferencedEntity implements Comparable<CustomComparatorSetReferencedEntity>{
 
@@ -24,6 +25,7 @@ public class CustomComparatorSetReferencedEntity implements Comparable<CustomCom
     @ManyToOne()
     @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private CustomComparatorSetCollectionEntity collectionEntity;
 
 

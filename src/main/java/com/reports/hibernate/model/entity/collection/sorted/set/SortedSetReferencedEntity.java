@@ -1,10 +1,7 @@
 package com.reports.hibernate.model.entity.collection.sorted.set;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -20,15 +17,16 @@ public class SortedSetReferencedEntity implements Comparable<SortedSetReferenced
 
     private String name;
 
-    @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false)
-    @EqualsAndHashCode.Exclude
-    private SortedSetCollectionEntity collectionEntity;
-
     public SortedSetReferencedEntity(String name, SortedSetCollectionEntity collectionEntity) {
         this.name = name;
         this.collectionEntity = collectionEntity;
     }
+
+    @ManyToOne()
+    @JoinColumn(name = "collectionEntityId", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private SortedSetCollectionEntity collectionEntity;
 
     @Override
     public int compareTo(SortedSetReferencedEntity o) {

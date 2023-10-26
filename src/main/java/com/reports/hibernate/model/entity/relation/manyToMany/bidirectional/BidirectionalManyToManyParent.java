@@ -9,9 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class BidirectionalManyToManyParent {
 
     @Id

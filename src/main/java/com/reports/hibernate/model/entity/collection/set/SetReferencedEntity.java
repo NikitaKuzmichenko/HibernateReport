@@ -1,10 +1,7 @@
 package com.reports.hibernate.model.entity.collection.set;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -20,14 +17,15 @@ public class SetReferencedEntity {
 
     private String name;
 
-    @ManyToOne()
-    @JoinColumn(name = "collectionEntityId", nullable = false)
-    @EqualsAndHashCode.Exclude
-    private SetCollectionEntity collectionEntity;
-
     public SetReferencedEntity(String name, SetCollectionEntity collectionEntity) {
         this.name = name;
         this.collectionEntity = collectionEntity;
     }
+
+    @ManyToOne()
+    @JoinColumn(name = "collectionEntityId", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private SetCollectionEntity collectionEntity;
 
 }

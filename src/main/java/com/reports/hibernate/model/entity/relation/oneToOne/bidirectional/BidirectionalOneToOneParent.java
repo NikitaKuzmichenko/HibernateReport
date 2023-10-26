@@ -3,8 +3,8 @@ package com.reports.hibernate.model.entity.relation.oneToOne.bidirectional;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class BidirectionalOneToOneParent {
 
     @Id

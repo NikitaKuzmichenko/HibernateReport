@@ -7,8 +7,8 @@ import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 public class LazySelectCollectionEntity {
 
     @Id

@@ -8,8 +8,8 @@ import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 public class LazyBatchCollectionEntity {
 
     public static final int BATCH_SIZE = 2;

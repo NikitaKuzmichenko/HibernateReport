@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class DefaultReferencedEntity {
 
@@ -24,5 +25,6 @@ public class DefaultReferencedEntity {
     @ManyToOne()
     @JoinColumn(name = "collectionEntityId", nullable = false)
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private DefaultCollectionEntity collectionEntity;
 }

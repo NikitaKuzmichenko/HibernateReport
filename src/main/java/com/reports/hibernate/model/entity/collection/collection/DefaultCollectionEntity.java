@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.Collection;
 
-@Entity
 @Data
+@Entity
 public class DefaultCollectionEntity {
 
     @Id

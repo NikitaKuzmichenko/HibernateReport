@@ -18,10 +18,6 @@ public class UnsupportedReferencedEntity implements Comparable<UnsupportedRefere
 
     private String name;
 
-    public UnsupportedReferencedEntity(String name) {
-        this.name = name;
-    }
-
     @Override
     public int compareTo(UnsupportedReferencedEntity o) {
         return 0;

@@ -8,9 +8,9 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class UnidirectionalManyToManyParent {
 
     @Id

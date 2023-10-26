@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 //@BatchSize(size = 5) also works, but globally
 public class LazyBatchReferencedEntity {

@@ -6,8 +6,8 @@ import org.hibernate.annotations.SortComparator;
 
 import java.util.Set;
 
-@Entity
 @Data
+@Entity
 public class CustomComparatorSetCollectionEntity{
 
     @Id

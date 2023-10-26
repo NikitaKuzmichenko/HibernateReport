@@ -3,8 +3,8 @@ package com.reports.hibernate.model.entity.collection.array;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class ArrayCollectionEntity {
 
     @Id

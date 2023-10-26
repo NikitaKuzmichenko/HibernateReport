@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class LazyJoinReferencedEntity {
 
