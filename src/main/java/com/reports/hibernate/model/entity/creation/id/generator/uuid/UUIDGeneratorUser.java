@@ -8,8 +8,8 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Entity
 @Data
+@Entity
 public class UUIDGeneratorUser {
 
     @Id

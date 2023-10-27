@@ -7,8 +7,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-@Entity
 @Data
+@Entity
 public class CustomGeneratorUser {
 
     @Id

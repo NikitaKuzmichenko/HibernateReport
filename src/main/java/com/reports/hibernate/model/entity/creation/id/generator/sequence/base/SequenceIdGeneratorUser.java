@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-@Entity
 @Data
+@Entity
 public class SequenceIdGeneratorUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

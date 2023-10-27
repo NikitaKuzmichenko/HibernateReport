@@ -3,8 +3,8 @@ package com.reports.hibernate.model.entity.creation.id.generator.sequence.custom
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @Data
+@Entity
 public class CustomisedSequenceIdGeneratorUser {
     @Id
     @GeneratedValue(

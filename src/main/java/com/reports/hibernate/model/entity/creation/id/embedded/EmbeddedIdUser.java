@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import lombok.Data;
 
 
-@Entity
 @Data
+@Entity
 public class EmbeddedIdUser {
 
     @EmbeddedId

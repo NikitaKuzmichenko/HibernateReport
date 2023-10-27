@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.Queue;
 
-@Entity
 @Data
+@Entity
 public class UnsupportedCollectionEntity {
 
     @Id
