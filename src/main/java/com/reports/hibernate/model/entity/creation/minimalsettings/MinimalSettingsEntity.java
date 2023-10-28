@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MinimalSettingsUser {
+public class MinimalSettingsEntity {
     @Id
     private Long id;
 

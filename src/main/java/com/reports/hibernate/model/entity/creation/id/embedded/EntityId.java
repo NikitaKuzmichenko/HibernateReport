@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-public class UserId implements Serializable {
+public class EntityId implements Serializable {
 
     private String firstName;
 

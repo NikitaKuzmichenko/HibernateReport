@@ -1,7 +1,7 @@
 package com.reports.hibernate.entity.creation.id;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.sequence.base.SequenceIdGeneratorUser;
+import com.reports.hibernate.model.entity.creation.id.generator.sequence.base.SequenceIdGeneratorEntity;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ class SequenceIdGeneratorTests extends BaseTest {
     @DisplayName("Create and get multiple entities")
     void createAndGetMultipleEntities() {
         int entitiesCount = 5;
-        List<SequenceIdGeneratorUser> users = new ArrayList<>();
+        List<SequenceIdGeneratorEntity> users = new ArrayList<>();
         List<Long> userIds = new ArrayList<>();
         for (int i = 0; i < entitiesCount; i++) {
-            SequenceIdGeneratorUser user = new SequenceIdGeneratorUser();
+            SequenceIdGeneratorEntity user = new SequenceIdGeneratorEntity();
             user.setFirstName("First " + i);
             user.setMiddleName("Middle " + i);
             user.setLastName("Last " + i);
@@ -29,9 +29,9 @@ class SequenceIdGeneratorTests extends BaseTest {
             userIds.add((Long) session.save(user));
         }
         flushAndClear();
-        List<SequenceIdGeneratorUser> fetchedUsers = new ArrayList<>();
+        List<SequenceIdGeneratorEntity> fetchedUsers = new ArrayList<>();
         for(long id : userIds){
-            fetchedUsers.add(session.get(SequenceIdGeneratorUser.class, id));
+            fetchedUsers.add(session.get(SequenceIdGeneratorEntity.class, id));
         }
         // Default increment size = 50 and default initial value = 1
         // Hibernate executes one select to get the ID from the sequence

@@ -8,7 +8,7 @@ import lombok.*;
 
 @Data
 @Entity
-public class TableIdGeneratorUser {
+public class TableIdGeneratorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;

@@ -9,7 +9,7 @@ import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
-public class CustomGeneratorUser {
+public class CustomGeneratorEntity {
 
     @Id
     @GeneratedValue(generator = "custom-generator")

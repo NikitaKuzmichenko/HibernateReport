@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.creation.id;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.embedded.EmbeddedIdUser;
-import com.reports.hibernate.model.entity.creation.id.embedded.UserId;
+import com.reports.hibernate.model.entity.creation.id.embedded.EmbeddedIdEntity;
+import com.reports.hibernate.model.entity.creation.id.embedded.EntityId;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,16 +15,16 @@ class EmbeddedIdTests extends BaseTest {
     @Test
     @DisplayName("Create and get entity")
     void createAndGetEntity() {
-        UserId id = new UserId();
+        EntityId id = new EntityId();
         id.setFirstName("First One");
         id.setMiddleName("Middle One");
         id.setLastName("Last One");
-        EmbeddedIdUser user = new EmbeddedIdUser();
+        EmbeddedIdEntity user = new EmbeddedIdEntity();
         user.setId(id);
         user.setAddress("Address One");
         session.save(user);
         flushAndClear();
-        EmbeddedIdUser fetchedUser = session.get(EmbeddedIdUser.class, id);
+        EmbeddedIdEntity fetchedUser = session.get(EmbeddedIdEntity.class, id);
         assertAll(
                 () -> AssertQueryCount.assertInsertCount(1),
                 () -> AssertQueryCount.assertSelectCount(1),

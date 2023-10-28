@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
-public class CustomisedSequenceIdGeneratorUser {
+public class CustomisedSequenceIdGeneratorEntity {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

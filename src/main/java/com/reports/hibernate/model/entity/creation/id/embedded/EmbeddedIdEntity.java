@@ -7,10 +7,10 @@ import lombok.Data;
 
 @Data
 @Entity
-public class EmbeddedIdUser {
+public class EmbeddedIdEntity {
 
     @EmbeddedId
-    private UserId id;
+    private EntityId id;
 
     private String address;
 

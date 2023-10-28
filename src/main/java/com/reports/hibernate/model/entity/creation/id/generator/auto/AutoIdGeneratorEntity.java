@@ -1,16 +1,16 @@
-package com.reports.hibernate.model.entity.creation.id.generator.sequence.base;
+package com.reports.hibernate.model.entity.creation.id.generator.auto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Data;
 
 @Data
 @Entity
-public class SequenceIdGeneratorUser {
+public class AutoIdGeneratorEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String firstName;
