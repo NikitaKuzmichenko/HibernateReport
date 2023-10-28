@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class ManualIdGenerationUser {
+public class ManualIdGenerationEntity {
 
     @Id
     private Long id;

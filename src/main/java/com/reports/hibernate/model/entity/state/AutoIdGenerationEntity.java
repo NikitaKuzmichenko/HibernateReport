@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class AutoIdGenerationUser {
+public class AutoIdGenerationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
