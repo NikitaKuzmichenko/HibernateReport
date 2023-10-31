@@ -42,8 +42,19 @@ class MappedSuperClassTests extends BaseTest {
     @Test
     @DisplayName("Polymorphic select of all entities")
     void polymorphicSelect() {
-        assertThrows(java.lang.IllegalArgumentException.class, () -> {
-            session.createQuery("SELECT e FROM ParentMappedEntity e", ParentMappedEntity.class).list();
-        });
+        FirstChildMappedEntity child1 = new FirstChildMappedEntity();
+        child1.setName("First child");
+        SecondChildMappedEntity child2 = new SecondChildMappedEntity();
+        child2.setName("Second child");
+        session.save(child2);
+        session.save(child1);
+        flushAndClear();
+        List<ParentMappedEntity> list = session
+                .createQuery("SELECT e FROM com.reports.hibernate.model.entity.inheritance.mapped.ParentMappedEntity e", ParentMappedEntity.class)
+                .list();
+        assertAll(
+                () -> assertEquals(2, list.size()),
+                () -> AssertQueryCount.assertSelectCount(2)
+        );
     }
 }
