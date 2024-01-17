@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.relation.oneToMany;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.relation.oneToMany.unidirectional.UnidirectionalOneToManyChild;
-import com.reports.hibernate.model.entity.relation.oneToMany.unidirectional.UnidirectionalOneToManyParent;
+import com.reports.hibernate.model.entity.relation.oneToMany.unidirectional.UnidirectionalOneToManyPet;
+import com.reports.hibernate.model.entity.relation.oneToMany.unidirectional.UnidirectionalOneToManyOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,12 @@ public class UnidirectionalOneToManyTest extends BaseTest {
     @Test
     @DisplayName("One sided saving of parents")
     void oneSidedSaveOfParent() {
-        UnidirectionalOneToManyChild child = new UnidirectionalOneToManyChild();
-        child.setChildName("Child");
-        UnidirectionalOneToManyParent parent = new UnidirectionalOneToManyParent();
-        parent.setParentName("Parent");
-        parent.setChildren(List.of(child));
-        session.persist(parent);
+        UnidirectionalOneToManyPet pet = new UnidirectionalOneToManyPet();
+        pet.setName("Pet");
+        UnidirectionalOneToManyOwner owner = new UnidirectionalOneToManyOwner();
+        owner.setName("Owner");
+        owner.setPets(List.of(pet));
+        session.persist(owner);
         flushAndClear();
         assertAll(
                 () -> AssertQueryCount.assertInsertCount(2),

@@ -1,7 +1,7 @@
 package com.reports.hibernate.entity.creation.id;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.custom.CustomGeneratorEntity;
+import com.reports.hibernate.model.entity.creation.id.generator.custom.CustomGeneratorOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,22 +14,22 @@ class CustomIdGeneratorTests extends BaseTest {
     @Test
     @DisplayName("Create and get entity")
     void createAndGetEntity() {
-        CustomGeneratorEntity user = new CustomGeneratorEntity();
+        CustomGeneratorOwner user = new CustomGeneratorOwner();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");
         user.setLastName("Last One");
         String id = (String) session.save(user);
         flushAndClear();
 
-        CustomGeneratorEntity user2 = new CustomGeneratorEntity();
+        CustomGeneratorOwner user2 = new CustomGeneratorOwner();
         user2.setFirstName("First Second");
         user2.setMiddleName("Middle Second");
         user2.setLastName("Last Second");
         String id2 = (String) session.save(user2);
         flushAndClear();
 
-        CustomGeneratorEntity fetchedUser1 = session.get(CustomGeneratorEntity.class, id);
-        CustomGeneratorEntity fetchedUser2 = session.get(CustomGeneratorEntity.class, id2);
+        CustomGeneratorOwner fetchedUser1 = session.get(CustomGeneratorOwner.class, id);
+        CustomGeneratorOwner fetchedUser2 = session.get(CustomGeneratorOwner.class, id2);
         assertAll(
                 () -> AssertQueryCount.assertInsertCount(2),
                 () -> AssertQueryCount.assertSelectCount(2),

@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.collection;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.collection.array.ArrayCollectionEntity;
-import com.reports.hibernate.model.entity.collection.array.ArrayReferencedEntity;
+import com.reports.hibernate.model.entity.collection.array.ArrayOwner;
+import com.reports.hibernate.model.entity.collection.array.ArrayPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -16,15 +16,15 @@ class ArrayCollectionTests extends BaseTest {
     @Test
     @DisplayName("Insert entity with array")
     void createAndGetEntity() {
-        ArrayCollectionEntity entity = new ArrayCollectionEntity();
-        ArrayReferencedEntity[] originalCollection = Arrays.array(
-                new ArrayReferencedEntity("referencedEntity № 1", entity),
-                new ArrayReferencedEntity("referencedEntity № 2", entity));
-        entity.setReferencedEntities(originalCollection);
+        ArrayOwner entity = new ArrayOwner();
+        ArrayPet[] originalCollection = Arrays.array(
+                new ArrayPet("pet number 1", entity),
+                new ArrayPet("pet number 2", entity));
+        entity.setPets(originalCollection);
         session.persist(entity);
         flushAndClear();
-        entity = session.get(ArrayCollectionEntity.class, entity.getId());
-        ArrayReferencedEntity[] fetchedCollection = entity.getReferencedEntities();
+        entity = session.get(ArrayOwner.class, entity.getId());
+        ArrayPet[] fetchedCollection = entity.getPets();
         assertAll(
                 () -> assertArrayEquals(originalCollection, fetchedCollection),
                 () -> AssertQueryCount.assertUpdateCount(originalCollection.length), // order columns values update

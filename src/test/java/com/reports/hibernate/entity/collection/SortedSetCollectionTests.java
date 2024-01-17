@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.collection;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.collection.sorted.set.SortedSetCollectionEntity;
-import com.reports.hibernate.model.entity.collection.sorted.set.SortedSetReferencedEntity;
+import com.reports.hibernate.model.entity.collection.sorted.set.SortedSetOwner;
+import com.reports.hibernate.model.entity.collection.sorted.set.SortedSetPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.hibernate.collection.spi.PersistentSortedSet;
 import org.junit.jupiter.api.DisplayName;
@@ -17,17 +17,17 @@ class SortedSetCollectionTests extends BaseTest {
     @Test
     @DisplayName("Insert entity with sortedSet collection")
     void createAndGetEntity() {
-        SortedSetCollectionEntity entity = new SortedSetCollectionEntity();
-        SortedSet<SortedSetReferencedEntity> originalCollection = new TreeSet<>(Set.of(
-                new SortedSetReferencedEntity("referencedEntity № 1", entity),
-                new SortedSetReferencedEntity("referencedEntity № 2",entity)));
-        entity.setReferencedEntities(originalCollection);
+        SortedSetOwner entity = new SortedSetOwner();
+        SortedSet<SortedSetPet> originalCollection = new TreeSet<>(Set.of(
+                new SortedSetPet("pet number 1", entity),
+                new SortedSetPet("pet number 2",entity)));
+        entity.setPets(originalCollection);
         session.persist(entity);
         flushAndClear();
-        entity = session.get(SortedSetCollectionEntity.class, entity.getId());
-        Set<SortedSetReferencedEntity> fetchedCollection = entity.getReferencedEntities();
+        entity = session.get(SortedSetOwner.class, entity.getId());
+        Set<SortedSetPet> fetchedCollection = entity.getPets();
         assertAll(
-                () -> assertTrue(fetchedCollection instanceof PersistentSortedSet<SortedSetReferencedEntity>),
+                () -> assertTrue(fetchedCollection instanceof PersistentSortedSet<SortedSetPet>),
                 () -> assertEquals(originalCollection, fetchedCollection),
                 () -> AssertQueryCount.assertInsertCount(originalCollection.size() + 1)
         );

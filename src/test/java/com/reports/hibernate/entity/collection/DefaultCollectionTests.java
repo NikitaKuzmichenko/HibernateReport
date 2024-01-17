@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.collection;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.collection.collection.DefaultCollectionEntity;
-import com.reports.hibernate.model.entity.collection.collection.DefaultReferencedEntity;
+import com.reports.hibernate.model.entity.collection.collection.DefaultOwner;
+import com.reports.hibernate.model.entity.collection.collection.DefaultPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.hibernate.collection.spi.PersistentBag;
 import org.junit.jupiter.api.DisplayName;
@@ -19,17 +19,17 @@ class DefaultCollectionTests extends BaseTest {
     @Test
     @DisplayName("Insert entity with collection")
     void createAndGetEntity() {
-        DefaultCollectionEntity entity = new DefaultCollectionEntity();
-        List<DefaultReferencedEntity> originalCollection = List.of(
-                new DefaultReferencedEntity("referencedEntity № 1", entity),
-                new DefaultReferencedEntity("referencedEntity № 2", entity));
-        entity.setReferencedEntities(originalCollection);
+        DefaultOwner entity = new DefaultOwner();
+        List<DefaultPet> originalCollection = List.of(
+                new DefaultPet("pet number 1", entity),
+                new DefaultPet("pet number 2", entity));
+        entity.setPets(originalCollection);
         session.persist(entity);
         flushAndClear();
-        entity = session.get(DefaultCollectionEntity.class, entity.getId());
-        Collection<DefaultReferencedEntity> fetchedCollection = entity.getReferencedEntities();
+        entity = session.get(DefaultOwner.class, entity.getId());
+        Collection<DefaultPet> fetchedCollection = entity.getPets();
         assertAll(
-                () -> assertTrue(fetchedCollection instanceof PersistentBag<DefaultReferencedEntity>),
+                () -> assertTrue(fetchedCollection instanceof PersistentBag<DefaultPet>),
                 () -> assertEquals(originalCollection, fetchedCollection),
                 () -> AssertQueryCount.assertInsertCount(originalCollection.size() + 1)
         );

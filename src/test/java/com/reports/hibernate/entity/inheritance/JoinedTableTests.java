@@ -1,9 +1,9 @@
 package com.reports.hibernate.entity.inheritance;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.inheritance.table.joined.FirstChildJoinedTableEntity;
-import com.reports.hibernate.model.entity.inheritance.table.joined.ParentJoinedTableEntity;
-import com.reports.hibernate.model.entity.inheritance.table.joined.SecondChildJoinedTableEntity;
+import com.reports.hibernate.model.entity.inheritance.table.joined.JoinedCat;
+import com.reports.hibernate.model.entity.inheritance.table.joined.JoinedPet;
+import com.reports.hibernate.model.entity.inheritance.table.joined.JoinedDog;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ class JoinedTableTests extends BaseTest {
     @Test
     @DisplayName("Insert parent entity")
     void insertParentEntity() {
-        ParentJoinedTableEntity parentEntity = new ParentJoinedTableEntity();
-        parentEntity.setParentName("Parent");
-        session.save(parentEntity);
+        JoinedPet pet = new JoinedPet();
+        pet.setName("Some Pet");
+        session.save(pet);
         session.flush();
         AssertQueryCount.assertInsertCount(1);
     }
@@ -28,12 +28,14 @@ class JoinedTableTests extends BaseTest {
     @Test
     @DisplayName("Insert child entities")
     void insertChildEntities() {
-        FirstChildJoinedTableEntity child1 = new FirstChildJoinedTableEntity();
-        child1.setName("First child");
-        SecondChildJoinedTableEntity child2 = new SecondChildJoinedTableEntity();
-        child2.setName("Second child");
-        session.save(child2);
-        session.save(child1);
+        JoinedCat cat = new JoinedCat();
+        cat.setName("Cat");
+        cat.setLivesAmount(9);
+        JoinedDog dog = new JoinedDog();
+        dog.setName("Dog");
+        dog.setBarksPerDay(100);
+        session.save(dog);
+        session.save(cat);
         session.flush();
         AssertQueryCount.assertInsertCount(4);
     }
@@ -41,22 +43,24 @@ class JoinedTableTests extends BaseTest {
     @Test
     @DisplayName("Polymorphic select of all entities")
     void polymorphicSelect() {
-        ParentJoinedTableEntity parentEntity = new ParentJoinedTableEntity();
-        parentEntity.setParentName("Parent");
-        FirstChildJoinedTableEntity child1 = new FirstChildJoinedTableEntity();
-        child1.setName("First child");
-        SecondChildJoinedTableEntity child2 = new SecondChildJoinedTableEntity();
-        child2.setName("Second child");
-        session.save(parentEntity);
-        session.save(child2);
-        session.save(child1);
+        JoinedPet pet = new JoinedPet();
+        pet.setName("Some Pet");
+        JoinedCat cat = new JoinedCat();
+        cat.setLivesAmount(9);
+        cat.setName("Cat");
+        JoinedDog dog = new JoinedDog();
+        dog.setName("Dog");
+        dog.setBarksPerDay(100);
+        session.save(pet);
+        session.save(dog);
+        session.save(cat);
         flushAndClear();
-        List<ParentJoinedTableEntity> list = session
-                .createQuery("SELECT e FROM ParentJoinedTableEntity e", ParentJoinedTableEntity.class)
+        List<JoinedPet> list = session
+                .createQuery("SELECT e FROM JoinedPet e", JoinedPet.class)
                 .list();
         assertAll(
                 () -> AssertQueryCount.assertSelectCount(1),
-                () -> assertTrue(list.containsAll(List.of(parentEntity, child1, child2)))
+                () -> assertTrue(list.containsAll(List.of(pet, cat, dog)))
         );
     }
 }

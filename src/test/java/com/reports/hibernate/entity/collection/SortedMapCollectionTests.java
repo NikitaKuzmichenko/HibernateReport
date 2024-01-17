@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.collection;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.collection.sorted.map.SortedMapCollectionEntity;
-import com.reports.hibernate.model.entity.collection.sorted.map.SortedMapReferencedEntity;
+import com.reports.hibernate.model.entity.collection.sorted.map.SortedMapOwner;
+import com.reports.hibernate.model.entity.collection.sorted.map.SortedMapPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.hibernate.collection.spi.PersistentSortedMap;
 import org.junit.jupiter.api.DisplayName;
@@ -17,18 +17,18 @@ class SortedMapCollectionTests extends BaseTest {
     @Test
     @DisplayName("Insert entity with sortedSet collection")
     void createAndGetEntity() {
-        SortedMapCollectionEntity entity = new SortedMapCollectionEntity();
-        SortedMap<String, SortedMapReferencedEntity> originalCollection = new TreeMap<>(Map.of(
-                "referencedEntity № 1", new SortedMapReferencedEntity("referencedEntity № 1", entity),
-                "referencedEntity № 2" , new SortedMapReferencedEntity("referencedEntity № 2",entity)
+        SortedMapOwner entity = new SortedMapOwner();
+        SortedMap<String, SortedMapPet> originalCollection = new TreeMap<>(Map.of(
+                "pet number 1", new SortedMapPet("pet number 1", entity),
+                "pet number 2" , new SortedMapPet("pet number 2",entity)
         ));
-        entity.setReferencedEntities(originalCollection);
+        entity.setPets(originalCollection);
         session.persist(entity);
         flushAndClear();
-        entity = session.get(SortedMapCollectionEntity.class, entity.getId());
-        Map<String, SortedMapReferencedEntity> fetchedCollection = entity.getReferencedEntities();
+        entity = session.get(SortedMapOwner.class, entity.getId());
+        Map<String, SortedMapPet> fetchedCollection = entity.getPets();
         assertAll(
-                () -> assertTrue(fetchedCollection instanceof PersistentSortedMap<String, SortedMapReferencedEntity>),
+                () -> assertTrue(fetchedCollection instanceof PersistentSortedMap<String, SortedMapPet>),
                 () -> assertEquals(originalCollection.keySet(), fetchedCollection.keySet()),
                 () -> AssertQueryCount.assertInsertCount(originalCollection.size() + 1)
         );

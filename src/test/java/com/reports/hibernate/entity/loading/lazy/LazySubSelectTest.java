@@ -2,8 +2,8 @@ package com.reports.hibernate.entity.loading.lazy;
 
 import com.reports.hibernate.base.BaseTest;
 
-import com.reports.hibernate.model.entity.loading.lazy.subselect.LazySubSelectCollectionEntity;
-import com.reports.hibernate.model.entity.loading.lazy.subselect.LazySubSelectReferencedEntity;
+import com.reports.hibernate.model.entity.loading.lazy.subselect.LazySubSelectOwner;
+import com.reports.hibernate.model.entity.loading.lazy.subselect.LazySubSelectPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,15 +20,15 @@ public class LazySubSelectTest extends BaseTest {
     @Test
     @DisplayName("Single parent fetch without association")
     void singleParentFetchWithoutChildren() {
-        session.get(LazySubSelectCollectionEntity.class, 1);
+        session.get(LazySubSelectOwner.class, 1);
         AssertQueryCount.assertSelectCount(1);
     }
 
     @Test
     @DisplayName("Single parent fetch")
     void singleParentFetch() {
-        for (LazySubSelectReferencedEntity child : session.get(LazySubSelectCollectionEntity.class, 1)
-                .getReferencedEntities()) {
+        for (LazySubSelectPet child : session.get(LazySubSelectOwner.class, 1)
+                .getPets()) {
             System.out.println(child);
         }
         AssertQueryCount.assertSelectCount(2);
@@ -37,11 +37,11 @@ public class LazySubSelectTest extends BaseTest {
     @Test
     @DisplayName("Multiple parents fetch")
     void multipleParentFetch() {
-        List<LazySubSelectCollectionEntity> entities =
-                session.createQuery("from LazySubSelectCollectionEntity", LazySubSelectCollectionEntity.class)
+        List<LazySubSelectOwner> entities =
+                session.createQuery("from LazySubSelectOwner", LazySubSelectOwner.class)
                         .getResultList();
-        for (LazySubSelectCollectionEntity parent : entities) {
-            for (LazySubSelectReferencedEntity child : parent.getReferencedEntities()) {
+        for (LazySubSelectOwner parent : entities) {
+            for (LazySubSelectPet child : parent.getPets()) {
                 System.out.println(child);
             }
         }

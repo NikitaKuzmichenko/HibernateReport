@@ -1,9 +1,9 @@
 package com.reports.hibernate.entity.inheritance;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.inheritance.table.single.FirstChildSingleTableEntity;
-import com.reports.hibernate.model.entity.inheritance.table.single.ParentSingleTableEntity;
-import com.reports.hibernate.model.entity.inheritance.table.single.SecondChildSingleTableEntity;
+import com.reports.hibernate.model.entity.inheritance.table.single.SingleTableCat;
+import com.reports.hibernate.model.entity.inheritance.table.single.SingleTablePet;
+import com.reports.hibernate.model.entity.inheritance.table.single.SingleTableDog;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +17,10 @@ class SingleTableTests extends BaseTest {
 
     @Test
     @DisplayName("Insert parent entity")
-    void insertParentEntity() {
-        ParentSingleTableEntity parentEntity = new ParentSingleTableEntity();
-        parentEntity.setParentName("Parent");
-        session.save(parentEntity);
+    void insertpet() {
+        SingleTablePet pet = new SingleTablePet();
+        pet.setName("Some Pet");
+        session.save(pet);
         session.flush();
         AssertQueryCount.assertInsertCount(1);
     }
@@ -28,12 +28,14 @@ class SingleTableTests extends BaseTest {
     @Test
     @DisplayName("Insert child entities")
     void insertChildEntities() {
-        FirstChildSingleTableEntity child1 = new FirstChildSingleTableEntity();
-        child1.setFirstChildName("First child");
-        SecondChildSingleTableEntity child2 = new SecondChildSingleTableEntity();
-        child2.setSecondChildName("Second child");
-        session.save(child2);
-        session.save(child1);
+        SingleTableCat cat = new SingleTableCat();
+        cat.setName("Cat");
+        cat.setLivesAmount(9);
+        SingleTableDog dog = new SingleTableDog();
+        dog.setName("Dog");
+        dog.setBarksPerDay(100);
+        session.save(dog);
+        session.save(cat);
         session.flush();
         AssertQueryCount.assertInsertCount(2);
     }
@@ -41,22 +43,24 @@ class SingleTableTests extends BaseTest {
     @Test
     @DisplayName("Polymorphic select of all entities")
     void polymorphicSelect() {
-        ParentSingleTableEntity parentEntity = new ParentSingleTableEntity();
-        parentEntity.setParentName("Parent");
-        FirstChildSingleTableEntity child1 = new FirstChildSingleTableEntity();
-        child1.setFirstChildName("First child");
-        SecondChildSingleTableEntity child2 = new SecondChildSingleTableEntity();
-        child2.setSecondChildName("Second child");
-        session.save(parentEntity);
-        session.save(child2);
-        session.save(child1);
+        SingleTablePet pet = new SingleTablePet();
+        pet.setName("Some Pet");
+        SingleTableCat cat = new SingleTableCat();
+        cat.setName("Cat");
+        cat.setLivesAmount(9);
+        SingleTableDog dog = new SingleTableDog();
+        dog.setName("Dog");
+        dog.setBarksPerDay(100);
+        session.save(pet);
+        session.save(dog);
+        session.save(cat);
         flushAndClear();
-        List<ParentSingleTableEntity> list = session
-                .createQuery("SELECT e FROM ParentSingleTableEntity e", ParentSingleTableEntity.class)
+        List<SingleTablePet> list = session
+                .createQuery("SELECT e FROM SingleTablePet e", SingleTablePet.class)
                 .list();
         assertAll(
                 () -> AssertQueryCount.assertSelectCount(1),
-                () -> assertTrue(list.containsAll(List.of(parentEntity, child1, child2)))
+                () -> assertTrue(list.containsAll(List.of(pet, cat, dog)))
         );
     }
 }

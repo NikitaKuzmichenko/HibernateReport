@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.relation.oneToMany;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.relation.oneToMany.bad.BadOneToManyChild;
-import com.reports.hibernate.model.entity.relation.oneToMany.bad.BadOneToManyParent;
+import com.reports.hibernate.model.entity.relation.oneToMany.bad.BadOneToManyPet;
+import com.reports.hibernate.model.entity.relation.oneToMany.bad.BadOneToManyOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,12 @@ public class BadOneToManyTest extends BaseTest {
     @Test
     @DisplayName("One sided saving of parents")
     void oneSidedSaveOfParent() {
-        BadOneToManyChild child = new BadOneToManyChild();
-        child.setChildName("Child");
-        BadOneToManyParent parent = new BadOneToManyParent();
-        parent.setParentName("Parent");
-        parent.setChildren(List.of(child));
-        session.persist(parent);
+        BadOneToManyPet pet = new BadOneToManyPet();
+        pet.setName("Pet");
+        BadOneToManyOwner owner = new BadOneToManyOwner();
+        owner.setName("Owner");
+        owner.setPets(List.of(pet));
+        session.persist(owner);
         flushAndClear();
         assertAll(
                 () -> AssertQueryCount.assertInsertCount(3)

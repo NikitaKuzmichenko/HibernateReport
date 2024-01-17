@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.loading.lazy;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.loading.lazy.batch.LazyBatchCollectionEntity;
-import com.reports.hibernate.model.entity.loading.lazy.batch.LazyBatchReferencedEntity;
+import com.reports.hibernate.model.entity.loading.lazy.batch.LazyBatchOwner;
+import com.reports.hibernate.model.entity.loading.lazy.batch.LazyBatchPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,15 +19,14 @@ public class LazyBatchTest extends BaseTest {
     @Test
     @DisplayName("Single parent fetch without association")
     void singleParentFetchWithoutChildren() {
-        session.get(LazyBatchCollectionEntity.class, 1);
+        session.get(LazyBatchOwner.class, 1);
         AssertQueryCount.assertSelectCount(1);
     }
 
     @Test
     @DisplayName("Single parent fetch")
     void singleParentFetch() {
-        for (LazyBatchReferencedEntity child : session.get(LazyBatchCollectionEntity.class, 1)
-                .getReferencedEntities()) {
+        for (LazyBatchPet child : session.get(LazyBatchOwner.class, 1).getPets()) {
             System.out.println(child);
         }
         AssertQueryCount.assertSelectCount(2);
@@ -36,15 +35,15 @@ public class LazyBatchTest extends BaseTest {
     @Test
     @DisplayName("Multiple parents fetch")
     void multipleParentFetch() {
-        List<LazyBatchCollectionEntity> entities =
-                session.createQuery("from LazyBatchCollectionEntity", LazyBatchCollectionEntity.class)
+        List<LazyBatchOwner> entities =
+                session.createQuery("from LazyBatchOwner", LazyBatchOwner.class)
                         .getResultList();
-        for (LazyBatchCollectionEntity parent : entities) {
-            for (LazyBatchReferencedEntity child : parent.getReferencedEntities()) {
+        for (LazyBatchOwner parent : entities) {
+            for (LazyBatchPet child : parent.getPets()) {
                 System.out.println(child);
             }
         }
-        AssertQueryCount.assertSelectCount(1 + (entities.size() / LazyBatchCollectionEntity.BATCH_SIZE));
+        AssertQueryCount.assertSelectCount(1 + (entities.size() / LazyBatchOwner.BATCH_SIZE));
     }
 
 }

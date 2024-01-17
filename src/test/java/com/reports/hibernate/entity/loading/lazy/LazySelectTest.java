@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.loading.lazy;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.loading.lazy.select.LazySelectCollectionEntity;
-import com.reports.hibernate.model.entity.loading.lazy.select.LazySelectReferencedEntity;
+import com.reports.hibernate.model.entity.loading.lazy.select.LazySelectOwner;
+import com.reports.hibernate.model.entity.loading.lazy.select.LazySelectPet;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,15 +19,15 @@ public class LazySelectTest extends BaseTest {
     @Test
     @DisplayName("Single parent fetch without association")
     void singleParentFetchWithoutChildren() {
-        session.get(LazySelectCollectionEntity.class, 1);
+        session.get(LazySelectOwner.class, 1);
         AssertQueryCount.assertSelectCount(1);
     }
 
     @Test
     @DisplayName("Single parent fetch")
     void singleParentFetch() {
-        for (LazySelectReferencedEntity child : session.get(LazySelectCollectionEntity.class, 1)
-                .getReferencedEntities()) {
+        for (LazySelectPet child : session.get(LazySelectOwner.class, 1)
+                .getPets()) {
             System.out.println(child);
         }
         AssertQueryCount.assertSelectCount(2);
@@ -36,12 +36,12 @@ public class LazySelectTest extends BaseTest {
     @Test
     @DisplayName("Multiple parents fetch")
     void multipleParentFetch() {
-        List<LazySelectCollectionEntity> entities =
-                session.createQuery("from LazySelectCollectionEntity", LazySelectCollectionEntity.class)
+        List<LazySelectOwner> entities =
+                session.createQuery("from LazySelectOwner", LazySelectOwner.class)
                         .getResultList();
 
-        for (LazySelectCollectionEntity parent : entities) {
-            for (LazySelectReferencedEntity child : parent.getReferencedEntities()) {
+        for (LazySelectOwner parent : entities) {
+            for (LazySelectPet child : parent.getPets()) {
                 System.out.println(child);
             }
         }

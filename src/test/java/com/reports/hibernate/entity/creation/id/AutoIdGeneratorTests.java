@@ -1,7 +1,7 @@
 package com.reports.hibernate.entity.creation.id;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.auto.AutoIdGeneratorEntity;
+import com.reports.hibernate.model.entity.creation.id.generator.auto.AutoIdGeneratorOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ class AutoIdGeneratorTests extends BaseTest {
     @Test
     @DisplayName("Create and get entity")
     void createAndGetEntity() {
-        AutoIdGeneratorEntity user = new AutoIdGeneratorEntity();
+        AutoIdGeneratorOwner user = new AutoIdGeneratorOwner();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");
         user.setLastName("Last One");
         long id = (long) session.save(user);
         flushAndClear();
-        AutoIdGeneratorEntity fetchedUser = session.get(AutoIdGeneratorEntity.class, id);
+        AutoIdGeneratorOwner fetchedUser = session.get(AutoIdGeneratorOwner.class, id);
         assertAll(
                 () -> AssertQueryCount.assertNextValCount(1),
                 () -> AssertQueryCount.assertInsertCount(1),

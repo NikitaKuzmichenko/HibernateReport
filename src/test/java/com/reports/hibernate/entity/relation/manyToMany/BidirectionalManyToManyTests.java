@@ -1,8 +1,8 @@
 package com.reports.hibernate.entity.relation.manyToMany;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.relation.manyToMany.bidirectional.BidirectionalManyToManyChild;
-import com.reports.hibernate.model.entity.relation.manyToMany.bidirectional.BidirectionalManyToManyParent;
+import com.reports.hibernate.model.entity.relation.manyToMany.bidirectional.BidirectionalManyToManyPet;
+import com.reports.hibernate.model.entity.relation.manyToMany.bidirectional.BidirectionalManyToManyOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,86 +16,86 @@ import java.util.Set;
 class BidirectionalManyToManyTests extends BaseTest {
 
     @Test
-    @DisplayName("One sided saving of parents")
+    @DisplayName("One sided saving of owners")
     void oneSidedSaveOfParent() {
-        int parentsAmount = 3;
-        int childrenAmount = 3;
-        Set<BidirectionalManyToManyChild> children = generateChildren(parentsAmount);
-        Set<BidirectionalManyToManyParent> parents = generateParents(childrenAmount);
+        int ownersAmount = 3;
+        int petsAmount = 3;
+        Set<BidirectionalManyToManyPet> pets = generatePets(ownersAmount);
+        Set<BidirectionalManyToManyOwner> owners = generateOwners(petsAmount);
 
-        for (BidirectionalManyToManyParent parent : parents) {
-            parent.setChildren(children);
+        for (BidirectionalManyToManyOwner parent : owners) {
+            parent.setPets(pets);
             session.persist(parent);
             session.flush();
         }
 
         assertAll(
-                () -> assertNull(children.iterator().next().getParents()),
+                () -> assertNull(pets.iterator().next().getOwners()),
                 // hibernate won't set inverse references automatically
                 () -> AssertQueryCount.assertInsertCount(
-                        childrenAmount + parentsAmount + childrenAmount * childrenAmount)
+                        petsAmount + ownersAmount + petsAmount * petsAmount)
         );
     }
 
     @Test
-    @DisplayName("One sided saving of parents. Using of consistent setters")
+    @DisplayName("One sided saving of owners. Using of consistent setters")
     void oneSidedConsistentSaveOfParent() {
-        int parentsAmount = 3;
-        int childrenAmount = 3;
-        Set<BidirectionalManyToManyChild> children = generateChildren(parentsAmount);
-        Set<BidirectionalManyToManyParent> parents = generateParents(childrenAmount);
+        int ownersAmount = 3;
+        int petsAmount = 3;
+        Set<BidirectionalManyToManyPet> pets = generatePets(ownersAmount);
+        Set<BidirectionalManyToManyOwner> owners = generateOwners(petsAmount);
 
-        for (BidirectionalManyToManyParent parent : parents) {
-            parent.setChildrenConsistently(children);
+        for (BidirectionalManyToManyOwner parent : owners) {
+            parent.setChildrenConsistently(pets);
             session.persist(parent);
             session.flush();
         }
 
         assertAll(
-                () -> assertEquals(children.iterator().next().getParents().size(), parentsAmount),
+                () -> assertEquals(pets.iterator().next().getOwners().size(), ownersAmount),
                 () -> AssertQueryCount.assertInsertCount(
-                        childrenAmount + parentsAmount + childrenAmount * childrenAmount)
+                        petsAmount + ownersAmount + petsAmount * petsAmount)
         );
     }
 
     @Test
-    @DisplayName("One sided saving of children")
+    @DisplayName("One sided saving of pets")
     void oneSidedSaveOfChild() {
-        int parentsAmount = 3;
-        int childrenAmount = 3;
-        Set<BidirectionalManyToManyChild> children = generateChildren(parentsAmount);
-        Set<BidirectionalManyToManyParent> parents = generateParents(childrenAmount);
+        int ownersAmount = 3;
+        int petsAmount = 3;
+        Set<BidirectionalManyToManyPet> pets = generatePets(ownersAmount);
+        Set<BidirectionalManyToManyOwner> owners = generateOwners(petsAmount);
 
-        for (BidirectionalManyToManyChild child : children) {
-            child.setParents(parents);
+        for (BidirectionalManyToManyPet child : pets) {
+            child.setOwners(owners);
             session.persist(child);
             session.flush();
         }
 
         assertAll(
-                () -> AssertQueryCount.assertInsertCount(childrenAmount)
+                () -> AssertQueryCount.assertInsertCount(petsAmount)
         );
     }
 
 
-    private Set<BidirectionalManyToManyChild> generateChildren(int amount) {
-        Set<BidirectionalManyToManyChild> result = new HashSet<>();
+    private Set<BidirectionalManyToManyPet> generatePets(int amount) {
+        Set<BidirectionalManyToManyPet> result = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            BidirectionalManyToManyChild child = new BidirectionalManyToManyChild();
+            BidirectionalManyToManyPet pet = new BidirectionalManyToManyPet();
             // id autogenerated
-            child.setChildName("Child № " + i);
-            result.add(child);
+            pet.setName("Pet number " + i);
+            result.add(pet);
         }
         return result;
     }
 
-    private Set<BidirectionalManyToManyParent> generateParents(int amount) {
-        Set<BidirectionalManyToManyParent> result = new HashSet<>();
+    private Set<BidirectionalManyToManyOwner> generateOwners(int amount) {
+        Set<BidirectionalManyToManyOwner> result = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            BidirectionalManyToManyParent child = new BidirectionalManyToManyParent();
+            BidirectionalManyToManyOwner owner = new BidirectionalManyToManyOwner();
             // id autogenerated
-            child.setParentName("Parent № " + i);
-            result.add(child);
+            owner.setName("Owner number " + i);
+            result.add(owner);
         }
         return result;
     }

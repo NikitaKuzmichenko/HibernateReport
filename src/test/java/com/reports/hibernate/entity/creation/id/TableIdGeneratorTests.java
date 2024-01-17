@@ -1,7 +1,7 @@
 package com.reports.hibernate.entity.creation.id;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.creation.id.generator.table.TableIdGeneratorEntity;
+import com.reports.hibernate.model.entity.creation.id.generator.table.TableIdGeneratorOwner;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ class TableIdGeneratorTests extends BaseTest {
     @Test
     @DisplayName("Create and get entity")
     void createAndGetEntity() {
-        TableIdGeneratorEntity user = new TableIdGeneratorEntity();
+        TableIdGeneratorOwner user = new TableIdGeneratorOwner();
         user.setFirstName("First One");
         user.setMiddleName("Middle One");
         user.setLastName("Last One");
         long id = (long) session.save(user);
         flushAndClear();
-        TableIdGeneratorEntity fetchedUser = session.get(TableIdGeneratorEntity.class, id);
+        TableIdGeneratorOwner fetchedUser = session.get(TableIdGeneratorOwner.class, id);
         // additional select from generator-table and update of it generated be prepared statement
         // and doesn't use hibernate StatementInspector
         // u can see org.hibernate.id.enhanced.TableGenerator for your self

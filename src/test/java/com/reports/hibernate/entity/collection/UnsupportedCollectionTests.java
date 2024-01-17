@@ -1,7 +1,7 @@
 package com.reports.hibernate.entity.collection;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.collection.unsupported.UnsupportedCollectionEntity;
+import com.reports.hibernate.model.entity.collection.unsupported.UnsupportedOwner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,8 +15,8 @@ class UnsupportedCollectionTests extends BaseTest {
     @Test
     @DisplayName("Saving entity with unsupported collection type")
     void createAndGetEntity() {
-        UnsupportedCollectionEntity entity = new UnsupportedCollectionEntity();
-        entity.setReferencedEntities(new PriorityQueue<>());
+        UnsupportedOwner entity = new UnsupportedOwner();
+        entity.setPets(new PriorityQueue<>());
         assertThrows(jakarta.persistence.PersistenceException.class, () -> {
             session.persist(entity);
             flushAndClear();

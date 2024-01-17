@@ -1,9 +1,9 @@
 package com.reports.hibernate.entity.operation;
 
 import com.reports.hibernate.base.BaseTest;
-import com.reports.hibernate.model.entity.operation.OperationFirstChildEntity;
-import com.reports.hibernate.model.entity.operation.OperationParentEntity;
-import com.reports.hibernate.model.entity.operation.OperationSecondChildEntity;
+import com.reports.hibernate.model.entity.operation.OperationCat;
+import com.reports.hibernate.model.entity.operation.OperationOwner;
+import com.reports.hibernate.model.entity.operation.OperationDog;
 import com.reports.hibernate.sql.query.assertion.AssertQueryCount;
 import org.hibernate.proxy.HibernateProxy;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Save entity without flush")
     void saveOperationWithoutFlush() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         long generatedId = (long) session.save(entity);
         assertAll(
                 () -> assertEquals(generatedId, entity.getId()),
@@ -33,7 +33,7 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Save entity with flush")
     void saveOperationWithFlush() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         long generatedId = (long) session.save(entity);
         session.flush();
         assertAll(
@@ -46,7 +46,7 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Persist entity without flush")
     void persistOperationWithoutFlush() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         assertAll(
                 () -> assertNotEquals(0, entity.getId()),
@@ -58,7 +58,7 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Persist entity with flush")
     void persistOperationWithFlush() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         session.flush();
         assertAll(
@@ -71,15 +71,15 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Get entity")
     void getOperation() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         flushAndClear();
         AssertQueryCount.resetCount();
-        OperationParentEntity retrievedEntity = session.get(OperationParentEntity.class, entity.getId());
+        OperationOwner retrievedEntity = session.get(OperationOwner.class, entity.getId());
         assertAll(
                 () -> assertFalse(retrievedEntity instanceof HibernateProxy),
-                () -> assertEquals(retrievedEntity.getFirstChildEntities().size(), childrenAmount),
-                () -> assertEquals(retrievedEntity.getSecondChildEntities().size(), childrenAmount),
+                () -> assertEquals(retrievedEntity.getCats().size(), childrenAmount),
+                () -> assertEquals(retrievedEntity.getDogs().size(), childrenAmount),
                 () -> AssertQueryCount.assertSelectCount(1)
         );
     }
@@ -89,11 +89,11 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Load entity")
     void loadOperation() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         flushAndClear();
         AssertQueryCount.resetCount();
-        OperationParentEntity retrievedEntity = session.load(OperationParentEntity.class, entity.getId());
+        OperationOwner retrievedEntity = session.load(OperationOwner.class, entity.getId());
         assertAll(
                 () -> assertTrue(retrievedEntity instanceof HibernateProxy),
                 () -> assertNotNull(retrievedEntity.getName()),
@@ -105,11 +105,11 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Update entity")
     void updateOperation() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         flushAndClear();
         AssertQueryCount.resetCount();
-        OperationParentEntity otherEntity = new OperationParentEntity();
+        OperationOwner otherEntity = new OperationOwner();
         otherEntity.setId(entity.getId());
         otherEntity.setName("New name");
         session.update(otherEntity);
@@ -125,11 +125,11 @@ class OperationWithEntitiesTests extends BaseTest {
     @DisplayName("Merge entity")
     void mergeOperation() {
         int childrenAmount = 3;
-        OperationParentEntity entity = generateEntity(childrenAmount);
+        OperationOwner entity = generateEntity(childrenAmount);
         session.persist(entity);
         flushAndClear();
         AssertQueryCount.resetCount();
-        OperationParentEntity retrievedEntity = session.load(OperationParentEntity.class, entity.getId());
+        OperationOwner retrievedEntity = session.load(OperationOwner.class, entity.getId());
         assertAll(
                 () -> assertTrue(retrievedEntity instanceof HibernateProxy),
                 () -> assertNotNull(retrievedEntity.getName()),
@@ -137,19 +137,19 @@ class OperationWithEntitiesTests extends BaseTest {
         );
     }
 
-    private OperationParentEntity generateEntity(int childrenAmount) {
-        OperationParentEntity parentEntity = new OperationParentEntity();
-        parentEntity.setName("Parent Entity");
-        parentEntity.setFirstChildEntities(
+    private OperationOwner generateEntity(int childrenAmount) {
+        OperationOwner parentEntity = new OperationOwner();
+        parentEntity.setName("Owner");
+        parentEntity.setCats(
                 IntStream.
                         range(0, childrenAmount).
-                        mapToObj(index -> new OperationFirstChildEntity("First child entity № " + index)).
+                        mapToObj(index -> new OperationCat("Cat number " + index)).
                         collect(Collectors.toSet())
         );
-        parentEntity.setSecondChildEntities(
+        parentEntity.setDogs(
                 IntStream.
                         range(0, childrenAmount).
-                        mapToObj(index -> new OperationSecondChildEntity("Second child entity № " + index)).
+                        mapToObj(index -> new OperationDog("Dog number " + index)).
                         collect(Collectors.toSet())
         );
         return parentEntity;
